@@ -43,4 +43,15 @@ def encode(request):
             return JsonResponse({"error" : ve.message_dict}, safe=False)
 
 def decode(request):
-    pass
+    if request.method == "GET":
+        return render(request, "pages/decode.html")
+    elif request.method == "POST":
+        try:
+            to_be_decoded_url = request.POST["url"]
+            if(Url.objects.filter(encoded_url=to_be_decoded_url)):
+                url = Url.objects.get(encoded_url = to_be_decoded_url)
+                return JsonResponse({"original_url" : url.original_url}, safe=False)
+            else:
+                return JsonResponse({"message" : "This url has not been previously encoded."} , safe=False)
+        except ValidationError as ve:
+            return JsonResponse({"error": ve.message_dict}, safe=False)

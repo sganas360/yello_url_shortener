@@ -16,38 +16,42 @@ My URL shortener uses `http://short.est/` as the base URL like in the example gi
 ```bash
 $ git clone https://github.com/sganas360/yello_url_shortener.git
 ```
-2. Create a virtual environment 
+2. Open the project up with your IDE of choice
+```bash
+code yello_url_shortener
+```
+3. Create a virtual environment 
 ```bash
 $ python3 -m venv .venv
 ```
-3. Use the virtual environment 
+4. Use the virtual environment 
 ```bash
 $ source .venv/bin/activate
 ```
-4. Install dependencies 
+5. Install dependencies 
 ```bash
 $ pip install -r requirements.txt
 ```
-5. Create local database
+6. Create local database
 ```bash
 $ createdb url_shortener_db
 ```
-6. Make Migrations
+7. Make Migrations
 ```bash
 $ python3 manage.py makemigrations
 ```
-7. Migrate
+8. Migrate
 ```bash
 $ python3 manage.py migrate
 ```
-8. Start the developmental server and go to the default port on your browser which will be http://localhost:8000/
+9. Start the developmental server and go to the default port on your browser which will be http://localhost:8000/
 ```bash
 $ python3 manage.py runserver
 ```
-9. Choose between the two paths
+10. Choose between the two paths
 - Click on `Encode URL` button to enter a url that you want to encode 
 - Click on `Decode URL` button to enter a url that you want to decode to its original URL
-10. Enter the appropriate URL based on the path
+11. Enter the appropriate URL based on the path
 - Enter the URL that you want to encode on the input and click `Submit`, then you will receive a JSON response of the shortend URL or a validation error 
 - Enter the shortened URL that you want to decode on the input and click `Submit`, then you will receive a JSON response of the original url or a validation error 
 12. Clicking `Home` takes you to the home screen where you can choose to click between `Encode` or `Decode`

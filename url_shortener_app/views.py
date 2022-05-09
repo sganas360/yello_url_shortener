@@ -4,6 +4,7 @@ from django.forms import ValidationError
 from django.http import JsonResponse
 from .models import Url
 
+#Constants
 BASE_URL = "http://short.est/"
 CHARACTERS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 BASE = len(CHARACTERS)
@@ -20,6 +21,7 @@ def encode(request):
     elif request.method == "POST":
         try:
             to_be_encoded_url = request.POST["url"]
+            # Checks if the URL has been previously encoded and if yes, it returns the shortened URL for that URL 
             if(Url.objects.filter(original_url=to_be_encoded_url)):
                 url = Url.objects.get(original_url=to_be_encoded_url)
                 if(url.encoded_url):
@@ -27,6 +29,7 @@ def encode(request):
                 else:
                     return JsonResponse({"message" : "This is not a valid url."}, safe=False)
             else:
+                # Creates and encodes the new URL
                 new_url = Url.objects.create(original_url = to_be_encoded_url)
                 url_characters = []
                 id = new_url.id
@@ -48,10 +51,11 @@ def decode(request):
     elif request.method == "POST":
         try:
             to_be_decoded_url = request.POST["url"]
+            # Checks if the URL has been previously encoded and if yes, it will return the original URL 
             if(Url.objects.filter(encoded_url=to_be_decoded_url)):
                 url = Url.objects.get(encoded_url = to_be_decoded_url)
                 return JsonResponse({"original_url" : url.original_url}, safe=False)
             else:
-                return JsonResponse({"message" : "This url has not been previously encoded."} , safe=False)
+                return JsonResponse({"message" : "This is not a valid shortened url that has an original url attached to it."} , safe=False)
         except ValidationError as ve:
             return JsonResponse({"error": ve.message_dict}, safe=False)

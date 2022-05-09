@@ -1,0 +1,8 @@
+<form method="POST">
+  {% csrf_token %}
+  <div class = "container">
+      <label for="url" class="form-label">URL:</label>
+      <input class="form-control" name = "url" placeholder="Enter the url here" required>
+      <button type="submit" class="btn btn-primary my-2">Submit</button>
+  </div>
+</form>

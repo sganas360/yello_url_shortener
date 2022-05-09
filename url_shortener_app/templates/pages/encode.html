@@ -1,0 +1,14 @@
+{% extends "pages/layout.html" %}
+{% block content %}
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <h1>Encode URL</h1>
+  </div>
+  <div class="row my-2">
+    <a href = {% url "home" %}>Home</a>
+  </div>
+  <div class="row">
+    {% include "pages/form.html" %}
+  </div>
+</div>
+{% endblock %}
